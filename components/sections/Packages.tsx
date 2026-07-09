@@ -98,6 +98,50 @@ function CalendlyModal({ onClose }: { onClose: () => void }) {
     return () => { document.body.style.overflow = ""; };
   }, []);
 
+  return (
+    <motion.div
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "rgba(0,0,0,0.8)", backdropFilter: "blur(8px)" }}
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.85, opacity: 0, y: 30 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.85, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        className="relative w-full max-w-2xl rounded-2xl overflow-hidden border border-[#D4AF37]/20"
+        style={{ background: "var(--bg-card)" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div
+          className="flex items-center justify-between p-6 border-b"
+          style={{ borderColor: "var(--border-subtle)" }}
+        >
+          <div>
+            <h3 className="text-xl font-black" style={{ color: "var(--text-heading)" }}>
+              Book Your Free Discovery Call
+            </h3>
+            <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>
+              Choose a time that works for you
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-9 h-9 rounded-full flex items-center justify-center transition-colors"
+            style={{ background: "var(--border-subtle)", color: "var(--text-primary)" }}
+          >
+            ✕
+          </button>
+        </div>
+        <iframe
+          src="https://calendly.com/info-remotesolutionsgroup/30min"
+          width="100%" height="650" frameBorder="0" title="Schedule a Meeting"
+        />
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function Packages() {
   const [active, setActive] = useState("silver");
