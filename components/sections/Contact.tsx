@@ -56,13 +56,28 @@ function CalendlyModal({ onClose }: { onClose: () => void }) {
 
 type FormState = "idle" | "sending" | "success" | "error";
 
+const socialLinks = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/remote.solutionsgroup?igsh=c3NleGswdXZxZ3Nn",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+      </svg>
+    ),
+  }, 
+];
+
 export default function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [showCalendly, setShowCalendly] = useState(false);
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
-const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", message: "" });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormState("sending");
@@ -76,13 +91,10 @@ const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", 
       });
 
       const data = await res.json();
-
       if (!res.ok) throw new Error(data.error || "Failed to send");
 
       setFormState("success");
       setForm({ name: "", company: "", email: "", phone: "", message: "" });
-
-      // Reset after 5 seconds
       setTimeout(() => setFormState("idle"), 5000);
     } catch (err) {
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong");
@@ -97,7 +109,6 @@ const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", 
       className="relative py-28 overflow-hidden transition-colors duration-400"
       style={{ background: "var(--bg-secondary)" }}
     >
-      {/* Top gold line */}
       <div className="absolute top-0 left-1/4 right-1/4 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
 
       <div className="max-w-6xl mx-auto px-6">
@@ -150,12 +161,13 @@ const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", 
             <h3 className="text-lg font-bold mb-6" style={{ color: "var(--text-heading)" }}>
               Send a Message
             </h3>
-<form onSubmit={handleSubmit} className="space-y-4">
+
+            <form onSubmit={handleSubmit} className="space-y-4">
               {[
-                { key: "name",    label: "Your Name",     placeholder: "John Smith",      type: "text"  },
-                { key: "company", label: "Company Name",  placeholder: "Acme Corp",       type: "text"  },
-                { key: "email",   label: "Email Address", placeholder: "john@acme.com",   type: "email" },
-                { key: "phone",   label: "Phone Number",  placeholder: "+1 (555) 000-0000", type: "tel" },
+                { key: "name",    label: "Your Name",     placeholder: "John Smith",        type: "text"  },
+                { key: "company", label: "Company Name",  placeholder: "Acme Corp",         type: "text"  },
+                { key: "email",   label: "Email Address", placeholder: "john@acme.com",     type: "email" },
+                { key: "phone",   label: "Phone Number",  placeholder: "+1 (555) 000-0000", type: "tel"   },
               ].map((field) => (
                 <div key={field.key}>
                   <label
@@ -168,7 +180,7 @@ const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", 
                     type={field.type}
                     placeholder={field.placeholder}
                     required={field.key !== "company"}
-                  value={form[field.key as keyof typeof form] ?? ""}
+                    value={form[field.key as keyof typeof form] ?? ""}
                     onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
                     disabled={formState === "sending"}
                     className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all focus:ring-1 focus:ring-[#D4AF37]/50 disabled:opacity-50"
@@ -208,7 +220,6 @@ const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", 
                 />
               </div>
 
-              {/* Feedback messages */}
               <AnimatePresence>
                 {formState === "success" && (
                   <motion.div
@@ -242,7 +253,6 @@ const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", 
                 )}
               </AnimatePresence>
 
-              {/* Submit button */}
               <motion.button
                 type="submit"
                 whileHover={{ scale: formState === "sending" ? 1 : 1.02 }}
@@ -322,11 +332,49 @@ const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", 
                   </div>
                 ))}
               </div>
+
+              {/* Social links */}
+              <div className="mt-8">
+                <div className="text-xs tracking-widest uppercase font-semibold mb-4" style={{ color: "var(--text-muted)", opacity: 0.7 }}>
+                  Follow Us
+                </div>
+                <div className="flex items-center gap-3 flex-wrap">
+                  {socialLinks.map((s) => (
+                    <motion.a
+                      key={s.label}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 border"
+                      style={{
+                        background: "var(--bg-secondary)",
+                        borderColor: "var(--border-subtle)",
+                        color: "var(--text-muted)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(212,175,55,0.5)";
+                        e.currentTarget.style.color = "#D4AF37";
+                        e.currentTarget.style.background = "rgba(212,175,55,0.08)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = "var(--border-subtle)";
+                        e.currentTarget.style.color = "var(--text-muted)";
+                        e.currentTarget.style.background = "var(--bg-secondary)";
+                      }}
+                    >
+                      {s.icon}
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Why book a call */}
             <div
-              className="rounded-xl p-6 mt-4 border"
+              className="rounded-xl p-6 border"
               style={{ background: "rgba(212,175,55,0.06)", borderColor: "rgba(212,175,55,0.18)" }}
             >
               <h4 className="text-[#D4AF37] font-bold text-sm mb-4">Why book a call?</h4>
