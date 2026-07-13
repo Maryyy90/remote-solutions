@@ -342,10 +342,10 @@ style={{
 }}
       >
         <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-          <StatCounter value={500} suffix="+" label="Clients Served" />
-          <StatCounter value={98} suffix="%" label="Satisfaction Rate" />
-          <StatCounter value={12} suffix="+" label="Industries" />
-          <StatCounter value={3} suffix="x" label="Avg. ROI Growth" />
+          <StatCounter value={100} suffix="+" label="Clients Served" />
+          <StatCounter value={70} suffix="%" label="Satisfaction Rate" />
+          <StatCounter value={10} suffix="+" label="Industries" />
+          <StatCounter value={2} suffix="x" label="Avg. ROI Growth" />
         </div>
       </motion.div>
     </section>
