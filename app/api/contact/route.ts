@@ -3,7 +3,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const TO_EMAIL = "info.remotesolutionsgroup@gmail.com";  
+const TO_EMAIL = "info@remotesolutionss.com";  
 
 export async function POST(req: NextRequest) {
   try {
