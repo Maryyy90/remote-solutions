@@ -303,7 +303,7 @@ export default function Contact() {
                       </svg>
                     ),
                     label: "Email",
-                    value: "info.remotesolutionsgroup@gmail.com",
+                    value: "info@remotesolutionss.com",
                     sub: "We respond within 24 hours",
                   },
                   {
