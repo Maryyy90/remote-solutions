@@ -59,7 +59,8 @@ type FormState = "idle" | "sending" | "success" | "error";
 const socialLinks = [
   {
     label: "Instagram",
-    href: "https://www.instagram.com/remote.solutionsgroup?igsh=c3NleGswdXZxZ3Nn",
+    
+    href: "https://www.instagram.com/remote.solutionsgroup",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-5 h-5">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
