@@ -135,7 +135,7 @@ function CalendlyModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
         <iframe
-          src="https://calendly.com/info-remotesolutionsgroup/30min"
+          src="https://calendly.com/remotesolutionss-info/30min"
           width="100%" height="650" frameBorder="0" title="Schedule a Meeting"
         />
       </motion.div>
