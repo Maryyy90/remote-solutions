@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: "Remote Solutions <onboarding@resend.dev>", // change after verifying your domain
+      from: "Remote Solutions <no-reply@remotesolutionss.com>", 
       to: [TO_EMAIL],
       replyTo: email,
       subject: `New Contact Form Submission from ${name}`,
